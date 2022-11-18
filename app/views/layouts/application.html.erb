@@ -6,10 +6,52 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+   <header class= "shadow">
+    <nav class="navbar navbar-expand-lg navbar-light">
+     <div class= "container">
+      <a class="navbar-brand" href="/" style="color: #919191; font-size: 30px;">DOORS</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarNavDropdown">
+     <ul class= "navbar-nav ml-auto">
 
+      <% if user_signed_in? %>
+       <li class="nav-item mr-3">
+        <%= link_to "マイページ", '/my_pages/:id', class: "btn  btn-outline-dark ml-0" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "話題投稿", new_topic_path, class: "btn  btn-outline-dark ml-0" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "about", home_about_path, class: "btn  btn-outline-dark ml-5" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "話題一覧", topics_path, class: "btn  btn-outline-dark ml-0" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "ログアウト", destroy_user_session_path, class: "btn  btn-outline-dark", method: :delete %>
+       </li>
+      <% else %>
+       <!--<li class="mr-3">-->
+       <!-- < %= link_to "about", home_about_path, class: "btn  btn-outline-dark ml-5" %>-->
+       <!--</li>-->
+       <li class="mx-3">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn  btn-outline-dark" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "ログイン", new_user_session_path, class: "btn  btn-outline-dark" %>
+       </li>
+      <% end %>
+
+     </ul>
+     </div>
+     </div>
+    </nav>
+   </header>
   <body>
     <%= yield %>
   </body>

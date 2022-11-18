@@ -1,0 +1,32 @@
+<div class="container-fluid" style="margin: 50px 300px 0 300px">
+ <div class="col-5">
+ <table class="table">
+  <thead>
+   <tr>
+    <th width><h4><strong>話題投稿</strong></h4></th>
+   </tr>
+  </thead>
+  <tbody class="table-borderless">
+  <%= form_with model: @topic do |f| %>
+   <tr>
+    <td>
+     <h5>タイトル</h5>
+     <%= f.text_field :name, placeholder: "タイトル", :size=>"70" %>
+    </td>
+   </tr>
+    <td>
+     <h5 class="mt-4">概要</h5>
+     <%= f.text_area :overview, placeholder: "概要", :size=>"73x6"%></br>
+      <p style="color:#919191;">※氏名やメールアドレスなどの個人情報は入力しないでください</p>
+    </td>
+   </tr>
+   <tr>
+    <td>
+     <p><%= link_to "キャンセル", "../", class: "btn  btn-outline-dark" %>  <%= f.submit "確認", class: "btn btn-primary" %></p>
+    </td>
+   </tr>
+  <% end %>
+  </tbody>
+ </table>
+ </div>
+</div>

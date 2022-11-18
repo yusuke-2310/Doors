@@ -1,0 +1,44 @@
+<div class="container-fluid" style="margin: 50px 300px 0 300px">
+ <div class="col-7">
+ <table class="table">
+  <thead>
+   <tr class="table-borderless">
+    <th><h4><strong><%= @topic.name %></strong></h4>
+    <th></th>
+   </tr>
+   <tr class="border-top-0">
+    <th style="color: #6e6e6e;"><%= @topic.overview %></th>
+    <th></th>
+   </tr>
+  </thead>
+  <tbody class="table-borderless">
+  <% @topic.topic_comments.each do |topic_comment| %>
+   <tr>
+    <td style="color: #6e6e6e;">
+     <%= image_tag topic_comment.user.get_profile_image(50,50) %>
+
+       <%= link_to topic_comment.user.name, my_page_path(@my_page) %>
+       　<%= time_ago_in_words(topic_comment.created_at)+ "前" %>
+    </td>
+   </tr>
+    <td class="pl-4">
+     <%= topic_comment.comment %>
+    </td>
+    <td>
+     <% if topic_comment.user == current_user %>
+      <%= link_to "削除", topic_topic_comment_path(topic_comment.topic, topic_comment), method: :delete %>
+     <% end %></td>
+   <tr>
+   </tr>
+  <% end %>
+   <tr>
+    <td style="color: #6e6e6e;">
+     <%= form_with model: [@topic, @topic_comment] do |f| %>
+      <%= f.text_area :comment, row: '5', placeholder: "コメントをここに", :size=>"60x3" %></br>
+      <%= f.submit "送信する" %>
+     <% end %>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</div>

@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="px-5 mx-auto">
+      <h2><strong>マイページ</strong></h2>
+      　<table cellpadding="10">
+      　 <th>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+          </th>
+          <tr>
+           <td><%= image_tag @my_page.get_profile_image(100,100) %></td>
+           <td></td>
+          </tr>
+          <tr>
+           <td>ユーザーネーム</td>
+           <td><%= @my_page.name %>
+          </tr>
+          <tr>
+           <td>email</td>
+           <td><%= @my_page.email %>
+          </tr>
+          <tr>
+           <td></td>
+           <td><%= link_to "編集", edit_my_page_path(current_user), class: "btn  btn-outline-dark" %></td>
+          </tr>
+      　<table>
+    <div>
+  </div>
+</div>
