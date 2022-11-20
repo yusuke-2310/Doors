@@ -16,9 +16,9 @@ class Users::TopicsController < ApplicationController
   end
 
   def show
-    @my_page = MyPage.find(params[:id])
     @topic = Topic.find(params[:id])
     @topic_comment = TopicComment.new
+    @my_page = User.find(params[:id])
   end
 
   private

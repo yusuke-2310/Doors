@@ -1,7 +1,7 @@
 class Users::MyPagesController < ApplicationController
 
  def show
-  @my_page = current_user
+  @my_page = User.find(params[:id])
   @topics = @my_page.topics
  end
 

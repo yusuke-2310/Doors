@@ -21,7 +21,7 @@
 
       <% if user_signed_in? %>
        <li class="nav-item mr-3">
-        <%= link_to "マイページ", '/my_pages/:id', class: "btn  btn-outline-dark ml-0" %>
+        <%= link_to "マイページ", my_page_path(current_user), class: "btn  btn-outline-dark ml-0" %>
        </li>
        <li class="mx-3">
         <%= link_to "話題投稿", new_topic_path, class: "btn  btn-outline-dark ml-0" %>
@@ -46,7 +46,6 @@
         <%= link_to "ログイン", new_user_session_path, class: "btn  btn-outline-dark" %>
        </li>
       <% end %>
-
      </ul>
      </div>
      </div>

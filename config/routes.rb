@@ -17,6 +17,13 @@ Rails.application.routes.draw do
     resources :topic_comments, only: [:create, :destroy]
    end
    resources :my_pages, only: [:show, :edit, :update]
+   resources :users do
+    resource :relationships, only: [:create, :destroy]
+    # post 'follow/:id' => 'relationships#follow', as: 'follow'
+    # post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
  end
 
 namespace :admins do

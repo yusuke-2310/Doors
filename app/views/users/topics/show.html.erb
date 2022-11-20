@@ -16,7 +16,6 @@
    <tr>
     <td style="color: #6e6e6e;">
      <%= image_tag topic_comment.user.get_profile_image(50,50) %>
-
        <%= link_to topic_comment.user.name, my_page_path(@my_page) %>
        　<%= time_ago_in_words(topic_comment.created_at)+ "前" %>
     </td>
