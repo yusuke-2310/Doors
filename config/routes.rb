@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
- devise_for :admins, skip: [:registrations, :passwords], controllers: {
-  sessions: "admin/sessions"
+ devise_for :admins, controllers: {
+  sessions: "admins/sessions"
  }
 
   devise_for :users, controllers: {
@@ -11,9 +11,15 @@ Rails.application.routes.draw do
  }
 
  get "/home/about" => "homes#about"
+ resources :searches, only: [:new] do
+  collection do
+      get :search
+  end
+ end
 
  scope module: :users do
    resources :topics, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
     resources :topic_comments, only: [:create, :destroy]
    end
    resources :my_pages, only: [:show, :edit, :update]
@@ -23,7 +29,7 @@ Rails.application.routes.draw do
     # post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
-  end
+   end
  end
 
 namespace :admins do

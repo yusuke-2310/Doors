@@ -1,0 +1,24 @@
+<h2>Results index</h2>
+
+<table class="table table-hover table-inverse">
+ <!--検索対象がUserモデルの時-->
+ <% if @range == "User" %>
+   <tbody>
+    <% @users.each do |user| %>
+     <tr>
+      <td><%= user.name %></td>
+     </tr>
+    <% end %>
+   </tbody>
+    <% else %>
+   <!--検索対象がUserではない場合(=Topicの時)-->
+   <tbody>
+    <% @topics.each do |topic| %>
+     <tr>
+      <td><%= topic.name %></br>
+      <%= topic.overview %></td>
+     </tr>
+    <% end %>
+   </tbody>
+ <% end %>
+</table>

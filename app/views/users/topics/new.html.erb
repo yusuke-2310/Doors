@@ -6,8 +6,8 @@
     <th width><h4><strong>話題投稿</strong></h4></th>
    </tr>
   </thead>
-  <tbody class="table-borderless">
   <%= form_with model: @topic do |f| %>
+   <tbody class="table-borderless">
    <tr>
     <td>
      <h5>タイトル</h5>
@@ -25,8 +25,8 @@
      <p><%= link_to "キャンセル", "../", class: "btn  btn-outline-dark" %>  <%= f.submit "確認", class: "btn btn-primary" %></p>
     </td>
    </tr>
+   </tbody>
   <% end %>
-  </tbody>
  </table>
  </div>
 </div>

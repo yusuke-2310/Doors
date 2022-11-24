@@ -8,7 +8,7 @@ class Users::TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     @topic.save
-    redirect_to topics_path(topic.id)
+    redirect_to topics_path(@topic.id)
   end
 
   def index
