@@ -3,19 +3,20 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :topics, dependent: :destroy
   has_many :topic_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+  has_many :favorited_topic, through: :favorites, source: :topic
+
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
- 
+
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
+
   # フォローしたときの処理
   def follow(user_id)
   relationships.create(followed_id: user_id)
@@ -28,7 +29,8 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
+  # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")

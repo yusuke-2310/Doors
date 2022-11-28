@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <div><h2 class="border-bottom mb-3"><strong>話題一覧</strong></h2>
+   <% @topics.each do |topic| %>
+    <h5>
+    <%= link_to admins_topic_path(topic.id) do %>
+     <%= topic.name %>
+    <% end %>
+    </h5>
+    <p style="color: #6e6e6e;">
+     <%= topic.overview %>
+     　<%= link_to "#{topic.topic_comments.count} コメント", admins_topic_path(topic.id) %>
+     　<%= topic.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
+    </p>
+    <p>
+    </p>
+   <% end %>
+  </div>
+</div>

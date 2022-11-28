@@ -1,13 +1,13 @@
 <div class="container-fluid" style="margin: 50px 300px 0 300px">
  <div class="col-5">
+ <%= form_with model: @topic do |f| %>
  <table class="table">
   <thead>
    <tr>
     <th width><h4><strong>話題投稿</strong></h4></th>
    </tr>
   </thead>
-  <%= form_with model: @topic do |f| %>
-   <tbody class="table-borderless">
+  <tbody class="table-borderless">
    <tr>
     <td>
      <h5>タイトル</h5>
@@ -16,8 +16,16 @@
    </tr>
     <td>
      <h5 class="mt-4">概要</h5>
-     <%= f.text_area :overview, placeholder: "概要", :size=>"73x6"%></br>
-      <p style="color:#919191;">※氏名やメールアドレスなどの個人情報は入力しないでください</p>
+      <%= f.text_area :overview, placeholder: "概要", :size=>"73x6"%></br>
+       <p style="color:#919191;">※氏名やメールアドレスなどの個人情報は入力しないでください</p>
+       <% if @topic.errors.any? %>
+        <%= @topic.errors.count %>件のエラーが発生しました
+        <ul>
+         <% @topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+         <% end %>
+        </ul>
+      <% end %>
     </td>
    </tr>
    <tr>
@@ -25,8 +33,8 @@
      <p><%= link_to "キャンセル", "../", class: "btn  btn-outline-dark" %>  <%= f.submit "確認", class: "btn btn-primary" %></p>
     </td>
    </tr>
-   </tbody>
-  <% end %>
+  </tbody>
  </table>
+ <% end %>
  </div>
 </div>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admins::SessionsController < Devise::SessionsController
+  protect_from_forgery
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -17,6 +18,14 @@ class Admins::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+
+  def after_sign_in_path_for(resource)
+    admins_topics_path # ログイン後に遷移するpathを設定
+  end
+
+  def after_sign_out_path_for(resource)
+    new_admin_session_path # ログアウト後に遷移するpathを設定
+  end
 
   # protected
 

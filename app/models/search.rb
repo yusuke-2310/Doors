@@ -1,8 +1,5 @@
-class MyPage < ApplicationRecord
- 
-  validates :name, presence: true
-  validates :email, presence: true
-  
+class Search < ApplicationRecord
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)

@@ -5,9 +5,7 @@
    <tr class="table-borderless">
     <th><h4><strong><%= @topic.name %></strong></h4>
     <th>
-     <% if @topic.user == current_user %>
-      <%= link_to "削除", topic_path(@topic), method: :delete %>
-     <% end %>
+      <%= link_to "削除", admins_topic_path(@topic), method: :delete %>
     </th>
    </tr>
    <tr class="border-top-0">
@@ -20,7 +18,7 @@
    <tr>
     <td style="color: #6e6e6e;">
      <%= image_tag topic_comment.user.get_profile_image(50,50) %>
-       <%= link_to topic_comment.user.name, my_page_path(topic_comment.user.id) %>
+       <%= topic_comment.user.name %>
        　<%= time_ago_in_words(topic_comment.created_at)+ "前" %>
     </td>
    </tr>
@@ -28,20 +26,11 @@
      <%= topic_comment.comment %>
     </td>
     <td>
-     <% if topic_comment.user == current_user %>
       <%= link_to "削除", topic_topic_comment_path(topic_comment.topic, topic_comment), method: :delete %>
-     <% end %></td>
+    </td>
    <tr>
    </tr>
   <% end %>
-   <tr>
-    <td style="color: #6e6e6e;">
-     <%= form_with model: [@topic, @topic_comment] do |f| %>
-      <%= f.text_area :comment, row: '5', placeholder: "コメントをここに", :size=>"60x3" %></br>
-      <%= f.submit "送信する" %>
-     <% end %>
-    </td>
-   </tr>
   </tbody>
  </table>
 </div>

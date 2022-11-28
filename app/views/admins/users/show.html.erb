@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3">
+      <h2><strong>マイページ</strong></h2>
+    　<table cellpadding="10" class="table">
+        <tr>
+         <td><%= image_tag @user.get_profile_image(100,100) %></td>
+         <td></td>
+        </tr>
+        <tr>
+         <td>ユーザーネーム：</td>
+         <td><%= @user.name %></td>
+        </tr>
+         <tr>
+         <td>フォロー数: <%= @user.followings.count %></td>
+         <td></td>
+        </tr>
+        <tr class="table-borderless">
+         <td>フォロワー数: <%= @user.followers.count %></td>
+         <td></td>
+        </tr>
+        <tr>
+         <td></td>
+         <td><%= link_to '削除', admins_user_path(@user), method: :delete, data: { confirm: "アカウントを削除してもよろしいですか？" } %></td>
+        </tr>
+    　</table>
+    </div>
+    <div class="col-8 ml-5 pl-5">
+      <h3><strong><%= @user.name %>さんの話題一覧</strong></h3>
+    　<table class="table">
+       <% @topics.each do |topic| %>
+       <h5>
+        <%= link_to admins_topic_path(topic.id) do %>
+        <%= topic.name %>
+        <% end %>
+       </h5>
+       <p style="color: #6e6e6e;">
+        <%= topic.overview %>
+         <%= link_to "#{topic.topic_comments.count} コメント", admins_topic_path(topic.id) %>
+         <%= topic.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
+       </p>
+       <p>
+       </p>
+       <% end %>
+      </table>
+    </div>
+  </div>
+</div>

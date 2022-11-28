@@ -1,45 +1,70 @@
-<div class="container mt-5">
+ <div class="container mt-5">
   <div class="row">
-    <div class="px-5 mx-auto">
-      <h2><strong>マイページ</strong></h2>
-      　<table cellpadding="10">
-      　 <th>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-          </th>
-          <tr>
-           <td><%= image_tag @my_page.get_profile_image(100,100) %></td>
-           <td></td>
-          </tr>
-          <tr>
-           <td>ユーザーネーム</td>
-           <td><%= @my_page.name %>
-          </tr>
-          <% if @my_page == current_user %>
-          <tr>
-           <td>email</td>
-           <td><%= @my_page.email %>
-          </tr>
+   <div class="col-4">
+    <h2><strong>マイページ</strong></h2>
+    <table cellpadding="10" class="table">
+       <tr>
+        <td><%= image_tag @my_page.get_profile_image(100,100) %></td>
+        <td></td>
+       </tr>
+       <tr>
+        <td>ユーザーネーム：</td>
+        <td><%= @my_page.name %>
+       </tr>
+       <% if @my_page == current_user %>
+       <tr>
+        <td>email：</td>
+        <td><%= @my_page.email %>
+       </tr>
+       <% end %>
+       <% unless @my_page == current_user %>
+        <tr>
+         <td>
+          <% if current_user.following?(@my_page) %>
+           <%= link_to "フォロー外す", user_relationships_path(@my_page.id), method: :delete %>
+          <% else %>
+           <%= link_to "フォローする", user_relationships_path(@my_page.id), method: :post %>
           <% end %>
-          <tr>
-           <td>
-           <% if current_user.following?(@my_page) %>
-            <%= link_to "フォロー外す", user_relationships_path(@my_page.id), method: :delete %>
-           <% else %>
-            <%= link_to "フォローする", user_relationships_path(@my_page.id), method: :post %>
-           <% end %>
-           </td>
-           <td>
-            
-           </td>
-          </tr>
-          <tr>
-           <td></td>
-           <td><%= link_to "編集", edit_my_page_path(current_user), class: "btn  btn-outline-dark" %></td>
-          </tr>
-      　<table>
-    </div>
+         </td>
+        </tr>
+       <% end %>
+       <tr>
+         <td>フォロー数： <%= link_to @my_page.followings.count, user_followings_path(@my_page.id) %></td>
+         <td></td>
+       </tr>
+       <tr class="table-borderless">
+         <td>フォロワー数： <%= link_to @my_page.followers.count, user_followers_path(@my_page.id) %></td>
+         <td></td>
+       </tr>
+       <tr>
+        <td></td>
+        <td>
+          <% if @my_page == current_user %>
+           <%= link_to "編集", edit_my_page_path(current_user), class: "btn  btn-outline-dark" %>
+           <%= link_to '退会', user_registration_path, method: :delete, data: { confirm: "アカウントを削除してもよろしいですか？" }, class: "btn  btn-outline-dark" %>
+          <% end %>
+        </td>
+       </tr>
+     </table>
+   </div>
+   <div class="col-7 ml-5 pl-5">
+    <h3><strong><%= @my_page.name %>さんの話題一覧</strong></h3>
+    　<table class="table">
+       <% @topics.each do |topic| %>
+       <h5>
+        <%= link_to topic_path(topic.id) do %>
+        <%= topic.name %>
+        <% end %>
+       </h5>
+       <p style="color: #6e6e6e;">
+        <%= topic.overview %>
+         <%= link_to "#{topic.topic_comments.count} コメント", topic_path(topic.id) %>
+         <%= topic.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
+       </p>
+       <p>
+       </p>
+       <% end %>
+      </table>
+   </div>
   </div>
-</div>
+ </div>

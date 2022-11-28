@@ -39,7 +39,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def after_sign_in_path_for(resource)
-    topics_path
+    topics_path # ログイン後に遷移するpathを設定
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_registration_path # ログアウト後に遷移するpathを設定
   end
 
   protected

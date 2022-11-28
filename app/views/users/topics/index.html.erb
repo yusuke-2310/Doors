@@ -1,34 +1,53 @@
 <div class="container mt-5">
- <div class="row">
-  <div class="col-3">
-  <h5><strong>タグ一覧</strong></h5>
+  <div class="row">
+    <div class="col-5">
+      <h5><strong>いちおし話題</strong></h5>
+        <% @topics_favorites.each do |topic| %>
+          <h6>
+            <%= link_to topic_path(topic.id) do %>
+              <%= topic.name %>
+            <% end %>
+          </h6>
+        <p style="color: #6e6e6e;">
+            <%= topic.overview %>
+          <% if topic.favorited_by?(current_user) %>
+            <%= link_to topic_favorites_path(topic), method: :delete do %>
+              ♥<%= topic.favorites.count %> いいね
+            <% end %>
+          <% else %>
+            <%= link_to topic_favorites_path(topic), method: :post do %>
+              ♥<%= topic.favorites.count %> いいね
+            <% end %>
+          <% end %>
+          <% end %>
+        </p>
+        <p>
+        </p>
+    </div>
+    <div class="col-7"><h2 class="border-bottom mb-3"><strong>話題一覧</strong></h2>
+      <% @topics.each do |topic| %>
+        <h5>
+          <%= link_to topic_path(topic.id) do %>
+            <%= topic.name %>
+          <% end %>
+        </h5>
+        <p style="color: #6e6e6e;">
+          <%= topic.overview %>
+            <%= link_to "#{topic.topic_comments.count} コメント", topic_path(topic.id) %>
+            <%= topic.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
+          <% if topic.favorited_by?(current_user) %>
+            <%= link_to topic_favorites_path(topic), method: :delete do %>
+              ♥<%= topic.favorites.count %> いいね
+          <% end %>
+          <% else %>
+            <%= link_to topic_favorites_path(topic), method: :post do %>
+              ♥<%= topic.favorites.count %> いいね
+          <% end %>
+          <% end %>
+        <% end %>
+      </p>
+      <p>
+      </p>
+    </div>
   </div>
-  <div class="col-6"><h2 class="border-bottom mb-3"><strong>話題一覧</strong></h2>
-   <% @topics.each do |topic| %>
-    <h5>
-    <%= link_to topic_path(topic.id) do %>
-     <%= topic.name %>
-    <% end %>
-    </h5>
-    <p style="color: #6e6e6e;">
-     <%= topic.overview %>
-     　<%= link_to "#{topic.topic_comments.count} コメント", topic_path(topic.id) %>
-     　<%= topic.created_at.strftime('%Y/%m/%d/%H:%M:%S') %>
-      <!--< % if @topic.favorited_by?(current_user) %>-->
-      <!--   < %= link_to topic_favorites_path(@topic), method: :delete do %>-->
-      <!--    ♥< %= @topic.favorites.count %> いいね-->
-      <!--   < % end %>-->
-      <!--  < % else %>-->
-      <!--   < %= link_to topic_favorites_path(@topic), method: :post do %>-->
-      <!--    ♥< %= @topic.favorites.count %> いいね-->
-      <!--   < % end %>-->
-      <!--< % end %>-->
-    </p>
-    <p>
-    </p>
-   <% end %>
- </div>
- <div class="col-3">
-  <h5><strong>いちおし話題</strong></h5>
- </div>
 </div>

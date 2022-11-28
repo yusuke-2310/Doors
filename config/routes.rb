@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
 
+ root to: 'homes#about'
+
  devise_for :admins, controllers: {
   sessions: "admins/sessions"
  }
 
-  devise_for :users, controllers: {
-   sessions: 'users/sessions',
-   passwords: 'users/passwords',
-   registrations: 'users/registrations'
+ devise_for :users, controllers: {
+  sessions: 'users/sessions',
+  passwords: 'users/passwords',
+  registrations: 'users/registrations'
  }
 
  get "/home/about" => "homes#about"
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
 
 namespace :admins do
   resources :topics, only: [:new, :create, :edit, :update, :destroy, :index, :show,]
+  resources :users, only: [:index, :show ,:destroy]
 end
 
 end
