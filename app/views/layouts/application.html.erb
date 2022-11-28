@@ -19,7 +19,17 @@
      <div class="collapse navbar-collapse" id="navbarNavDropdown">
      <ul class= "navbar-nav ml-auto">
 
-      <% if user_signed_in? %>
+      <% if admin_signed_in? %>
+       <li class="nav-item mr-3">
+        <%= link_to "ユーザー一覧", admins_users_path, class: "btn  btn-outline-dark ml-0" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "話題一覧", admins_topics_path, class: "btn  btn-outline-dark ml-0" %>
+       </li>
+       <li class="mx-3">
+        <%= link_to "ログアウト", destroy_admin_session_path, class: "btn  btn-outline-dark", method: :delete %>
+       </li>
+      <% elsif user_signed_in? %>
        <li class="nav-item mr-3">
         <%= link_to "マイページ", my_page_path(current_user), class: "btn  btn-outline-dark ml-0" %>
        </li>
@@ -34,16 +44,6 @@
        </li>
        <li class="mx-3">
         <%= link_to "ログアウト", destroy_user_session_path, class: "btn  btn-outline-dark", method: :delete %>
-       </li>
-      <% elsif admin_signed_in? %>
-       <li class="nav-item mr-3">
-        <%= link_to "ユーザー一覧", admins_users_path, class: "btn  btn-outline-dark ml-0" %>
-       </li>
-       <li class="mx-3">
-        <%= link_to "話題一覧", admins_topics_path, class: "btn  btn-outline-dark ml-0" %>
-       </li>
-       <li class="mx-3">
-        <%= link_to "ログアウト", destroy_admin_session_path, class: "btn  btn-outline-dark", method: :delete %>
        </li>
       <% else %>
        <li class="nav-item mr-3">
